@@ -1,0 +1,32 @@
+h1 {
+    text-align: center;
+    font-size: 32pt;
+}
+
+h2 {
+    font-size: 24pt;
+}
+
+.layout-body {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.left-nav {
+    min-width: 15%;
+    margin: 0 2em 0 0;
+    padding: 1em 1em 1em 2em;
+    float: left;
+    height: 100%;
+    background-color: cornflowerblue;
+}
+
+.nav-list {
+    list-style: none;
+    padding-left: 1em;
+}
+
+.nav-item {
+    padding: 0.5em 0;
+    font-size: large;
+}

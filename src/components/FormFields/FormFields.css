@@ -1,0 +1,9 @@
+.field-container {
+    display: flex;
+    flex-flow: row;
+    padding: 0.5em 0;
+}
+
+label {
+    margin-right: 0.5em;
+}

@@ -1,0 +1,9 @@
+.form-container {
+    display: flex;
+    flex-flow: column;
+}
+
+.submit-container {
+    display: flex;
+    justify-content: space-between;
+}

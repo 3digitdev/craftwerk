@@ -16,7 +16,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
-      "@myTypes/*": ["src/types/*"],
+//      "@craftwerkTypes/*": ["src/types/*"],
     },
     "resolveJsonModule": true,
     "isolatedModules": true,

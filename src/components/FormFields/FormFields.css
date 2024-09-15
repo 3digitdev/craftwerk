@@ -2,8 +2,15 @@
     display: flex;
     flex-flow: row;
     padding: 0.5em 0;
+    justify-content: space-between;
 }
 
 label {
     margin-right: 0.5em;
+    font-weight: bold;
+    font-size: large;
+}
+
+input, select {
+    font-size: large;
 }

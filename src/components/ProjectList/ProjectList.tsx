@@ -3,14 +3,14 @@ import {ProjectType} from "../../types/projects";
 import './ProjectList.css';
 
 const getProjects = (): Project[] => {
-    const now = Date.now()
+    const now = new Date()
     return [
         {
             type: ProjectType.Knitting,
             title: 'Test Project',
             creator: 'Max Bussiere',
             startDate: now,
-            endDate: now + 7,
+            endDate: new Date(now.getDate() + 7),
             dedication: null,
             dedicationDate: null,
             createdFor: null,

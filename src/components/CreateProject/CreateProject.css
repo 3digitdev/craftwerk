@@ -1,9 +1,35 @@
 .form-container {
     display: flex;
     flex-flow: column;
+    justify-content: stretch;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5em;
+}
+
+.advanced-toggle {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: large;
 }
 
 .submit-container {
     display: flex;
     justify-content: space-between;
+}
+
+.create-btn {
+    height: 3em;
+    font-size: x-large;
+    font-weight: bold;
 }

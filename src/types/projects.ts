@@ -2,10 +2,10 @@ type Project = {
     type: ProjectType;
     title: string;
     creator: string;
-    startDate: number;
-    endDate: number;
+    startDate: Date;
+    endDate: Date;
     dedication: string | null;
-    dedicationDate: number | null;
+    dedicationDate: Date | null;
     createdFor: string | null;
     occasion: string | null;
     dimensions: [number, number] | null;
@@ -64,7 +64,7 @@ type FabricMetadata = {
     totalYardage: number | null;
     purchaseStore: string | null;
     purchasePrice: number | null;
-    purchaseDate: number | null;
+    purchaseDate: Date | null;
 }
 
 type ThreadInfo = {
@@ -73,8 +73,8 @@ type ThreadInfo = {
     weight: string | null;
     composition: string | null;
     store: string | null;
-    price: string | null;
-    purchaseDate: number | null;
+    price: number | null;
+    purchaseDate: Date | null;
     amountUsed: string | null;
 }
 
@@ -83,14 +83,14 @@ type NeedleInfo = {
     brand: string | null;
     store: string | null;
     price: string | null;
-    purchaseDate: number | null;
+    purchaseDate: Date | null;
 }
 
 type QuiltInfo = {
     quiltedBy: string;
     shop: string | null;
     cost: string | null;
-    quiltDate: number | null;
+    quiltDate: Date | null;
     battings: Batting[];
     quiltType: QuiltType;
     otherQuiltType: string | null;  // null unless quiltType = QuiltType.Other
@@ -104,7 +104,7 @@ type Batting = {
     size: string | null;
     brand: string | null;
     store: string | null;
-    price: string | null;
+    price: number | null;
 }
 
 enum QuiltType {
@@ -129,7 +129,7 @@ type QuiltTypeData = {
 
 type Binding = {
     width: string | null;
-    date: string | null;
+    date: Date | null;
     style: string | null;
     fabrics: FabricMetadata[];
 }

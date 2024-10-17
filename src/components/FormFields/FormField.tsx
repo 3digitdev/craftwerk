@@ -16,7 +16,10 @@ const FormField = ({ name, capName, children }: FormFieldProps) => {
         <div className='field-container'>
             <label htmlFor={name}>{capitalized}</label>
             {children}
-            <ErrorMessage name={name}/>
+            <ErrorMessage name={`${name}`} />
+            <ErrorMessage name={`${name}.length`} />
+            <ErrorMessage name={`${name}.width`} />
+            <ErrorMessage name={`${name}.units`} />
         </div>
     )
 }

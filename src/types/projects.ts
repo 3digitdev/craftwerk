@@ -8,7 +8,7 @@ type Project = {
     dedicationDate: Date | null;
     createdFor: string | null;
     occasion: string | null;
-    dimensions: [number, number] | null;
+    dimensions: { length: number, width: number, units: DimensionUnits } | null,
     fabricInfo: FabricInfo | null;
     quiltInfo: QuiltInfo | null;
     binding: Binding | null;
@@ -17,6 +17,14 @@ type Project = {
 enum ProjectType {
     Quilting = "Quilting",
     Knitting = "Knitting",
+}
+
+enum DimensionUnits {
+    Millimeters = 'mm',
+    Centimeters = 'cm',
+    Meters = 'm',
+    Inches = 'in',
+    Feet = 'ft',
 }
 
 type FabricInfo = {
@@ -134,7 +142,7 @@ type Binding = {
     fabrics: FabricMetadata[];
 }
 
-export { ProjectType, PrecutType, QuiltType }
+export { ProjectType, PrecutType, QuiltType, DimensionUnits }
 
 export type {
     Project,

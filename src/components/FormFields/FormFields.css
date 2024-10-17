@@ -3,6 +3,7 @@
     flex-flow: row;
     padding: 0.5em 0;
     justify-content: space-between;
+    align-items: center;
 }
 
 label {
@@ -13,4 +14,16 @@ label {
 
 input, select {
     font-size: large;
+}
+
+.dimension-container {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dimension-field {
+    max-width: 3em;
+    margin-right: 0.5em;
 }

@@ -1,10 +1,11 @@
 import './CreateProject.css'
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from "../FormFields";
 import DropDownField from "../FormFields/DropDownField";
-import {PrecutType, ProjectType, QuiltType} from "../../types/projects";
+import {DimensionUnits, PrecutType, ProjectType, QuiltType} from "../../types/projects";
 import {useState} from "react";
+import DimensionsField from "../FormFields/DimensionsField";
 
 const fabricMetadataSchema = Yup.object({
     id: Yup.string().required('Required'),
@@ -37,7 +38,7 @@ const needleInfoSchema = Yup.object({
 })
 
 const projectValidator = Yup.object({
-    type: Yup.string().oneOf(Object.keys(ProjectType)).required('Required'),
+    type: Yup.string().oneOf(Object.values(ProjectType)).required('Required'),
     title: Yup.string().min(3, 'Must be at least 3 characters').required('Required'),
     creator: Yup.string().required('Required'),
     startDate: Yup.date().required('Required').default(() => new Date()),
@@ -46,10 +47,11 @@ const projectValidator = Yup.object({
     dedicationDate: Yup.date(),
     createdFor: Yup.string(),
     occasion: Yup.string(),
-    dimensions: Yup.tuple([
-        Yup.number().positive('Must be > 0').required('Required'),
-        Yup.number().positive('Must be > 0').required('Required')
-    ]),
+    dimensions: Yup.object({
+        length: Yup.number().positive('Must be > 0').required('Required').default(0),
+        width: Yup.number().positive('Must be > 0').required('Required').default(0),
+        units: Yup.string().oneOf(Object.values(DimensionUnits)),
+    }),
     fabricInfo: Yup.object({
         fabricType: Yup.object().oneOf([
             Yup.object({
@@ -61,7 +63,7 @@ const projectValidator = Yup.object({
                 fabrics: Yup.array().of(fabricMetadataSchema)
             }).label('Yardage'),
             Yup.object({
-                type: Yup.string().oneOf(Object.keys(PrecutType)).required('Required'),
+                type: Yup.string().oneOf(Object.values(PrecutType)).required('Required'),
                 otherDesc: Yup.string(),
                 primaryFabric: fabricMetadataSchema,
                 backgroundFabric: fabricMetadataSchema,
@@ -86,7 +88,7 @@ const projectValidator = Yup.object({
             store: Yup.string(),
             prince: Yup.number().positive('Must be > 0')
         })),
-        quiltType: Yup.string().oneOf(Object.keys(QuiltType)).required('Required'),
+        quiltType: Yup.string().oneOf(Object.values(QuiltType)).required('Required'),
         otherQuiltType: Yup.string().when('quiltType', {
             is: 'Other',
             then: s => s.required('Required'),
@@ -125,7 +127,7 @@ const CreateProject = () => {
 
     return (
         <Formik
-            initialValues={{}}  // Do we need defaults...?
+            initialValues={{dimensions: {length: 0, width: 0}}}  // Do we need defaults...?
             validationSchema={projectValidator}
             onSubmit={(values, { setSubmitting }) => {  // TODO!
                 setTimeout(() => {
@@ -134,27 +136,29 @@ const CreateProject = () => {
                 }, 400);
             }}
         >
-            <Form className='form-container'>
-                <DropDownField options={Object.keys(ProjectType)} name='type'/>
-                <TextField name='title'/>
-                <TextField name='creator'/>
-                {/* TODO:  DATE PICKERS */}
-                <TextField name='dedication'/>
-                <TextField name='createdFor' capName='Created For'/>
-                <TextField name='occasion'/>
-                {/* TODO: Dimensions multi-number picker */}
-                <div className='btn-container'>
-                    <button className='advanced-toggle' onClick={() => setAdvanced(!advanced)}>
-                        {advanced ? 'Hide' : 'Show'} Advanced
-                    </button>
-                </div>
-                <div className='advanced-container'>
-                    {renderAdvancedForm(advanced)}
-                </div>
-                <div className='btn-container'>
-                    <button className='create-btn' type='submit'>Create Project</button>
-                </div>
-            </Form>
+            {({ errors, touched }) => (
+                <Form className='form-container'>
+                    <DropDownField options={Object.values(ProjectType)} name='type'/>
+                    <TextField name='title'/>
+                    <TextField name='creator'/>
+                    {/* TODO:  DATE PICKERS */}
+                    <TextField name='dedication'/>
+                    <TextField name='createdFor' capName='Created For'/>
+                    <TextField name='occasion'/>
+                    <DimensionsField name='dimensions' />
+                    <div className='btn-container'>
+                        <button className='advanced-toggle' onClick={() => setAdvanced(!advanced)}>
+                            {advanced ? 'Hide' : 'Show'} Advanced
+                        </button>
+                    </div>
+                    <div className='advanced-container'>
+                        {renderAdvancedForm(advanced)}
+                    </div>
+                    <div className='btn-container'>
+                        <button className='create-btn' type='submit'>Create Project</button>
+                    </div>
+                </Form>
+            )}
         </Formik>
     );
 };
